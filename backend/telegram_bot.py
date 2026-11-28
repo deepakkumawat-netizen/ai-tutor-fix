@@ -874,7 +874,7 @@ async def _fetch_flashcards(subject, grade, topic=None):
     try:
         resp = await asyncio.to_thread(
             openai_client.chat.completions.create,
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
             messages=[
                 {"role": "system", "content": "Return ONLY raw JSON. No markdown, no code fences, no explanation."},
                 {"role": "user", "content": (
@@ -905,7 +905,7 @@ async def _fetch_test(subject, grade, topic=None):
     try:
         resp = await asyncio.to_thread(
             openai_client.chat.completions.create,
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
             messages=[
                 {"role": "system", "content": "Return ONLY raw JSON. No markdown, no code fences, no explanation."},
                 {"role": "user", "content": (

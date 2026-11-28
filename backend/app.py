@@ -278,7 +278,7 @@ async def generate_flashcards(request: FlashcardRequest):
     from mcp_server import client as openai_client
     try:
         resp = openai_client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
             messages=[{
                 "role": "system",
                 "content": "You are an expert teacher creating flashcards. Return ONLY valid JSON, no markdown."
@@ -312,7 +312,7 @@ async def generate_practice_test(request: PracticeTestRequest):
     from mcp_server import client as openai_client
     try:
         resp = openai_client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
             messages=[{
                 "role": "system",
                 "content": "You are an expert teacher creating multiple-choice tests. Return ONLY valid JSON, no markdown."
